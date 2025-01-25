@@ -1,5 +1,17 @@
 import mongoose, { connect } from "mongoose";
 
 export const connectDB = async () => {
-    await mongoose.connect('mongodb+srv://fooddelapp:356578@cluster0.xsdov.mongodb.net/food-del').then(()=>console.log("DB connected"))
-}
+    const DB_URL = process.env.DB_URL; 
+    if (!DB_URL) {
+        console.error("MongoDB URL is not set in the environment variables");
+        process.exit(1); 
+    }
+    
+    await mongoose
+        .connect(DB_URL)
+        .then(() => console.log("DB connected"))
+        .catch((err) => {
+            console.error("Failed to connect to DB", err);
+            process.exit(1); 
+        });
+};

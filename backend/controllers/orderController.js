@@ -4,7 +4,7 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const deliveryCharge = 50;
-const frontend_URL = 'http://localhost:5174';
+const frontend_URL = process.env.FRONTEND_URL;
 
 // placing user order for frontend
 const placeOrder = async (req,res) => {
